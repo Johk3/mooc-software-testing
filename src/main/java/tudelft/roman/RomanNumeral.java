@@ -19,19 +19,25 @@ public class RomanNumeral {
     }
 
     public int convert(String s) {
+        int num = 0;
+        System.out.println("s: " + s);
 
-        int convertedNumber = 0;
-        for(int i = 0; i < s.length(); i++) {
-            int currentNumber = map.get(s.charAt(i));
-            int next = i+1 < s.length() ? map.get(s.charAt(i+1)) : 0;
-
-            if(currentNumber >= next)
-                convertedNumber += currentNumber;
-            else
-                convertedNumber -= currentNumber;
+        if (s.length() == 1){
+            return map.get(s.charAt(0));
         }
 
-        return convertedNumber;
+        for (int i=0; i < s.length()-1; i++){
+            if (map.get(s.charAt(i)) < map.get(s.charAt(i+1))){
+                num -= map.get(s.charAt(i));
+                System.out.println("-: " + map.get(s.charAt(i)));
+            } else {
+                num += map.get(s.charAt(i));
+                System.out.println("+: " + map.get(s.charAt(i)));
+            }
 
+        }
+        num += map.get(s.charAt(s.length()-1));
+        System.out.println("RESULT: " + num);
+        return num;
     }
 }
